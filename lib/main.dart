@@ -1,4 +1,7 @@
+//PACKAGES
 import 'package:flutter/material.dart';
+//LIBRARIES
+import './transaction.dart';
 
 void main() => runApp(ExpenseApp());
 
@@ -13,8 +16,7 @@ class ExpenseApp extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
-  final List
-
+  final List<Transaction> transactions = [];
 
   @override
   Widget build(BuildContext context) {

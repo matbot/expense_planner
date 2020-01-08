@@ -16,7 +16,10 @@ class ExpenseApp extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
-  final List<Transaction> transactions = [];
+  final List<Transaction> transactions = [
+    Transaction(id: "1", title: "Coffee", price: 2.75, date: DateTime.now()),
+    Transaction(id: "2", title: "Sandwich", price: 4.99, date: DateTime.now())
+  ];
 
   @override
   Widget build(BuildContext context) {

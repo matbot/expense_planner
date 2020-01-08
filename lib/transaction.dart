@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 class Transaction {
   //PROPERTIES
   final String id;
@@ -6,7 +8,12 @@ class Transaction {
   final DateTime date;
 
   //CONSTRUCTOR
-  Transaction({this.id, this.title, this.price, this.date});
+  Transaction({
+    @required this.id,
+    @required this.title,
+    @required this.price,
+    @required this.date
+  });
   //METHODS
 
 }

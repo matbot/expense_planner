@@ -39,10 +39,52 @@ class HomePage extends StatelessWidget {
               elevation: 5,
             ),
           ),
-          Card(
-            color: Colors.redAccent,
-            child: Text("TEXTTEXTTEXT"),
-          ),
+          Column(
+            children: transactions.map((trxn) {
+              return Card(
+                child: Row(
+                  children: <Widget>[
+                    Container(
+                      margin:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.green,
+                          width: 2,
+                        ),
+                      ),
+                      padding: EdgeInsets.all(10),
+                      child: Text(
+                        /* String Interpolation */
+                        "\$${trxn.price}",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24,
+                            color: Colors.green),
+                      ),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          trxn.title,
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          trxn.date.toLocal().toString(),
+                          style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              );
+            }).toList(),
+          )
         ],
       ),
     );

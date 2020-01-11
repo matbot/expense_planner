@@ -2,16 +2,24 @@
 import 'package:flutter/material.dart';
 
 //LIBRARIES
-import 'package:expense_planner/widgets/user_transaction.dart';
 
 //CLASS DEFINITION
-class NewTransaction extends StatelessWidget {
+class NewTransaction extends StatefulWidget {
   //PROPERTIES
-  final titleController = TextEditingController();
-  final priceController = TextEditingController();
   final Function addTransaction;
 
   //METHODS
+  NewTransaction(this.addTransaction);
+
+  @override
+  _NewTransactionState createState() => _NewTransactionState();
+}
+
+class _NewTransactionState extends State<NewTransaction> {
+  final titleController = TextEditingController();
+
+  final priceController = TextEditingController();
+
   void submitTransaction() {
     final enteredTitle = titleController.text;
     final enteredPrice = double.parse(priceController.text);
@@ -20,14 +28,13 @@ class NewTransaction extends StatelessWidget {
       return;
     }
 
-    addTransaction(
+    widget.addTransaction(
       titleController.text,
       double.parse(priceController.text),
     );
-  }
 
-  //CONSTRUCTOR
-  NewTransaction(this.addTransaction);
+    Navigator.of(context).pop(); //Close bottom modal after form submit.
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -11,6 +11,10 @@ class ExpenseApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Expense App",
+      theme: ThemeData(
+        primarySwatch: Colors.indigo,
+        accentColor: Colors.amberAccent,
+      ),
       home: HomePage(),
     );
   }
@@ -53,35 +57,37 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Expense App"),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () => _openNewTransaction(context),
-          ),
-        ],
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Container(
-            width: double.infinity,
-            child: Card(
-              color: Colors.lightBlueAccent,
-              child: Text("CHART HERE"),
-              elevation: 5,
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Expense App"),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () => _openNewTransaction(context),
             ),
-          ),
-          TransactionList(_userTransactions),
-        ],
+          ],
+        ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Container(
+              width: double.infinity,
+              child: Card(
+                color: Theme.of(context).primaryColorLight,
+                child: Text("CHART HERE"),
+                elevation: 5,
+              ),
+            ),
+            TransactionList(_userTransactions),
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () => _openNewTransaction(context),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () => _openNewTransaction(context),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

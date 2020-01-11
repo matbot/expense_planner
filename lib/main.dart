@@ -14,6 +14,7 @@ class ExpenseApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.indigo,
         accentColor: Colors.amberAccent,
+        fontFamily: 'OpenSans',
       ),
       home: HomePage(),
     );

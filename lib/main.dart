@@ -1,6 +1,8 @@
 //PACKAGES
-import 'package:expense_planner/widgets/user_transaction.dart';
+import 'package:expense_planner/widgets/new_transaction.dart';
+import 'package:expense_planner/widgets/transaction_list.dart';
 import 'package:flutter/material.dart';
+import 'package:expense_planner/models/transaction.dart';
 
 void main() => runApp(ExpenseApp());
 
@@ -14,7 +16,41 @@ class ExpenseApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+
+  final List<Transaction> _userTransactions = [
+    Transaction(id: "1", title: "Coffee", price: 2.75, date: DateTime.now()),
+    Transaction(id: "2", title: "Sandwich", price: 4.99, date: DateTime.now())
+  ];
+
+  void _addTransaction(String title, double price) {
+    final newTransaction = Transaction(
+        title: title,
+        price: price,
+        date: DateTime.now(),
+        id: DateTime.now().toString()
+    );
+
+    setState(() {
+      _userTransactions.add(newTransaction);
+    });
+  }
+
+  void _openNewTransaction(BuildContext buttonContext) {
+    showModalBottomSheet(
+      context: buttonContext,
+      builder: (builderContext) {
+        return NewTransaction(_addTransaction);
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +59,7 @@ class HomePage extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
-            onPressed: () {},
+            onPressed: () => _openNewTransaction(context),
           ),
         ],
       ),
@@ -38,12 +74,12 @@ class HomePage extends StatelessWidget {
               elevation: 5,
             ),
           ),
-          UserTransaction(),
+          TransactionList(_userTransactions),
         ],
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () => _openNewTransaction(context),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
